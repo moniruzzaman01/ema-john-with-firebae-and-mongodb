@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { setLocalStorageData } from "../../utilities/fakedb";
 import Cart from "../cart/Cart";
 import Product from "../product/Product";
 import "./Shop.css";
@@ -17,6 +18,7 @@ function Shop() {
     // console.log(product);
     const newCart = [...cart, product];
     setCart(newCart);
+    setLocalStorageData(product.id);
   };
   console.log("cart", cart);
 
