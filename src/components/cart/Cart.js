@@ -19,11 +19,11 @@ function Cart({ cart }) {
     <div className="cart-container">
       <div className="cart">
         <h2>Cart container</h2>
-        <p>Total Products: {totalProduct} </p>
-        <p>Total Price: {totalPrice} </p>
-        <p>Shipping Fee: {ShippingFee} </p>
-        <p>Tax: {Tax} </p>
-        <h4>Grand Total: {grnadTotal} </h4>
+        <p>Total Products: {totalProduct.toFixed(2)} </p>
+        <p>Total Price: {totalPrice.toFixed(2)} </p>
+        <p>Shipping Fee: {ShippingFee.toFixed(2)} </p>
+        <p>Tax: {Tax.toFixed(2)} </p>
+        <h4>Grand Total: {grnadTotal.toFixed(2)} </h4>
       </div>
     </div>
   );
