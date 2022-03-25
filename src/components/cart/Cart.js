@@ -2,14 +2,13 @@ import React from "react";
 import "./Cart.css";
 
 function Cart({ cart }) {
-  console.log("cartComponent", cart);
-
   let totalProduct = 0;
   let totalPrice = 0;
   let ShippingFee = 0;
 
   for (const data of cart) {
-    totalPrice = totalPrice + data.price;
+    totalProduct = totalProduct + data.quantity;
+    totalPrice = totalPrice + data.price * data.quantity;
     ShippingFee = ShippingFee + data.shipping;
   }
 
@@ -19,7 +18,7 @@ function Cart({ cart }) {
     <div className="cart-container">
       <div className="cart">
         <h2>Cart container</h2>
-        <p>Total Products: {totalProduct.toFixed(2)} </p>
+        <p>Total Products: {totalProduct} </p>
         <p>Total Price: {totalPrice.toFixed(2)} </p>
         <p>Shipping Fee: {ShippingFee.toFixed(2)} </p>
         <p>Tax: {Tax.toFixed(2)} </p>
