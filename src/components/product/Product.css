@@ -1,0 +1,32 @@
+.product {
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 95%;
+  position: relative;
+}
+.product img {
+  width: 96%;
+  border-radius: 5px;
+  margin: 2%;
+}
+.product .details {
+  margin-bottom: 40px;
+}
+.product h3 {
+  margin: 20px 0 10px 2%;
+}
+.product .details p {
+  margin: 2px 0 0 2%;
+}
+.product button {
+  border: none;
+  border-radius: 0 0 5px 5px;
+  width: 100%;
+  padding: 10px 0;
+  position: absolute;
+  bottom: 0;
+  background-color: #1c2b35;
+  color: #fff;
+  font-size: 14px;
+  text-transform: capitalize;
+}
