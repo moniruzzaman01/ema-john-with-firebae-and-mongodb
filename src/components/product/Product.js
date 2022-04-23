@@ -1,12 +1,17 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "./Product.css";
 
 function Product({ product, cartBtnHandler }) {
-  //   console.log(product);
+  // console.log(product.id);
   const { img, name, seller, price, ratings } = product;
+  const navigate = useNavigate();
+  const navigateToDetails = (id) => {
+    navigate(`/shop/${id}`);
+  };
   return (
     <div className="product">
-      <img src={img} alt="" />
+      <img onClick={() => navigateToDetails(product.id)} src={img} alt="" />
       <h3>{name}</h3>
       <div className="details">
         <p>{price}</p>
