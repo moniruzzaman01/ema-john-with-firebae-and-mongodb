@@ -6,12 +6,14 @@ import SignIn from "./components/signin/SignIn";
 import Orders from "./orders/Orders";
 import ProductDetails from "./product details/ProductDetails";
 import RequireAuth from "./require-auth/RequireAuth";
+import Home from "./components/home/Home";
 
 function App() {
   return (
     <div>
       <Header></Header>
       <Routes>
+        <Route path="/" element={<Home />}></Route>
         <Route path="/shop" element={<Shop />}></Route>
         <Route path="/shop/:id" element={<ProductDetails />}></Route>
         <Route
