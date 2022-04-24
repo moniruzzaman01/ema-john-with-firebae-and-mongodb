@@ -8,3 +8,15 @@
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 20px;
 }
+
+.pagination button {
+  border: 1px solid #1c2b35;
+  border-radius: 5px;
+  color: #1c2b35;
+  background: #fff;
+  margin-right: 5px;
+}
+.pagination .selected {
+  background-color: #1c2b35;
+  color: #fff;
+}

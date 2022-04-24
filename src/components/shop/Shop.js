@@ -10,9 +10,22 @@ import "./Shop.css";
 function Shop() {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
+  const [totalPage, setTotalPage] = useState(0);
+  const [selected, setSelected] = useState(0);
+  const [pageSize, setPageSize] = useState(10);
 
   useEffect(() => {
-    fetch("products.json")
+    fetch("http://localhost:5000/totalProducts")
+      .then((res) => res.json())
+      .then((data) => {
+        const totalProducts = data.count;
+        const page = Math.ceil(totalProducts / 10);
+        setTotalPage(page);
+      });
+  }, []);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/products")
       .then((res) => res.json())
       .then((data) => setProducts(data));
   }, []);
@@ -22,7 +35,7 @@ function Shop() {
     const saved = [];
     // console.log(storedData);
     for (const id in storedData) {
-      const data = products.find((product) => product.id === id);
+      const data = products.find((product) => product._id === id);
       if (data) {
         const quantity = storedData[id];
         data.quantity = quantity;
@@ -35,7 +48,7 @@ function Shop() {
 
   //   console.log(products);
   const cartBtnHandler = (product) => {
-    const isExist = cart.find((data) => data.id === product.id);
+    const isExist = cart.find((data) => data.id === product._id);
     let newCart = [];
     if (isExist) {
       const rest = cart.filter((data) => data.id !== isExist.id);
@@ -51,9 +64,9 @@ function Shop() {
 
     // console.log(product);
     setCart(newCart);
-    setLocalStorageData(product.id);
+    setLocalStorageData(product._id);
   };
-
+  console.log(selected);
   return (
     <div className="shop">
       <div className="products">
@@ -64,6 +77,25 @@ function Shop() {
             cartBtnHandler={cartBtnHandler}
           ></Product>
         ))}
+        <div className="pagination">
+          {[...Array(totalPage).keys()].map((pageNumber, index) => (
+            <button
+              onClick={() => setSelected(pageNumber)}
+              className={selected === pageNumber ? "selected" : ""}
+              key={index}
+            >
+              {pageNumber}
+            </button>
+          ))}
+          <select onChange={(e) => setPageSize(e.target.value)} name="" id="">
+            <option value="5">5</option>
+            <option selected value="10">
+              10
+            </option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+          </select>
+        </div>
       </div>
       <Cart cart={cart}></Cart>
     </div>
