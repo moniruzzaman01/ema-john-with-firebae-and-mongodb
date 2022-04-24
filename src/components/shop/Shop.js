@@ -25,10 +25,12 @@ function Shop() {
   }, []);
 
   useEffect(() => {
-    fetch("http://localhost:5000/products")
+    fetch(
+      `http://localhost:5000/products?page=${selected}&pageSize=${pageSize}`
+    )
       .then((res) => res.json())
       .then((data) => setProducts(data));
-  }, []);
+  }, [selected, pageSize]);
 
   useEffect(() => {
     const storedData = getLocalStorageData();
@@ -66,7 +68,6 @@ function Shop() {
     setCart(newCart);
     setLocalStorageData(product._id);
   };
-  console.log(selected);
   return (
     <div className="shop">
       <div className="products">
@@ -77,27 +78,31 @@ function Shop() {
             cartBtnHandler={cartBtnHandler}
           ></Product>
         ))}
-        <div className="pagination">
-          {[...Array(totalPage).keys()].map((pageNumber, index) => (
-            <button
-              onClick={() => setSelected(pageNumber)}
-              className={selected === pageNumber ? "selected" : ""}
-              key={index}
-            >
-              {pageNumber}
-            </button>
-          ))}
-          <select onChange={(e) => setPageSize(e.target.value)} name="" id="">
-            <option value="5">5</option>
-            <option selected value="10">
-              10
-            </option>
-            <option value="15">15</option>
-            <option value="20">20</option>
-          </select>
-        </div>
       </div>
       <Cart cart={cart}></Cart>
+
+      <div className="pagination">
+        {[...Array(totalPage).keys()].map((pageNumber, index) => (
+          <button
+            onClick={() => setSelected(pageNumber)}
+            className={selected === pageNumber ? "selected" : ""}
+            key={index}
+          >
+            {pageNumber}
+          </button>
+        ))}
+        <select
+          defaultValue={10}
+          onChange={(e) => setPageSize(e.target.value)}
+          name=""
+          id=""
+        >
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="15">15</option>
+          <option value="20">20</option>
+        </select>
+      </div>
     </div>
   );
 }

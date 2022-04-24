@@ -8,7 +8,9 @@
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 20px;
 }
-
+.pagination {
+  margin: 10px auto;
+}
 .pagination button {
   border: 1px solid #1c2b35;
   border-radius: 5px;
